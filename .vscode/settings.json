@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "x86.h": "c",
+        "syscall.h": "c",
+        "stat.h": "c",
+        "user.h": "c",
+        "traps.h": "c",
+        "unistd.h": "c",
+        "memlayout.h": "c"
+    }
+}

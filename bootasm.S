@@ -40,15 +40,15 @@ seta20.2:
   # virtual addresses map directly to physical addresses so that the
   # effective memory map doesn't change during the transition.
   lgdt    gdtdesc
-  movl    %cr0, %eax
-  orl     $CR0_PE, %eax
+  movl    %cr0, %eax    # move CR0 register 
+  orl     $CR0_PE, %eax  
   movl    %eax, %cr0
 
 //PAGEBREAK!
   # Complete the transition to 32-bit protected mode by using a long jmp
   # to reload %cs and %eip.  The segment descriptors are set up with no
   # translation, so that the mapping is still the identity mapping.
-  ljmp    $(SEG_KCODE<<3), $start32
+    ljmp    $(SEG_KCODE<<3), $start32
 
 .code32  # Tell assembler to generate 32-bit code now.
 start32:

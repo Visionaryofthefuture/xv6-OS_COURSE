@@ -442,3 +442,8 @@ sys_pipe(void)
   fd[1] = fd1;
   return 0;
 }
+
+int sys_hello(void){
+  cprintf("Hello world\n");
+  return 0;
+}
