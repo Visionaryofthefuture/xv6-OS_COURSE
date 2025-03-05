@@ -6,6 +6,7 @@
         "user.h": "c",
         "traps.h": "c",
         "unistd.h": "c",
-        "memlayout.h": "c"
+        "memlayout.h": "c",
+        "types.h": "c"
     }
 }

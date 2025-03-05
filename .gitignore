@@ -14,3 +14,7 @@ kernel
 kernelmemfs
 mkfs
 .gdbinit
+612203171.lseek.patch
+hello.patch
+lseek.txt
+.vscode/

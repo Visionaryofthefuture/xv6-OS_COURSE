@@ -447,3 +447,51 @@ int sys_hello(void){
   cprintf("Hello world\n");
   return 0;
 }
+
+int sys_lseek(void){
+    int fd , offset, new_offset, whence;
+    struct file *f;
+
+    if(argfd(0, &fd, &f ) < 0){
+      cprintf("Your given file couldnt be found , please try again\n");
+      return -1; // Meaning the file couldn't be found
+    }
+
+    if(argint(1, &offset) < 0 || argint(2, &whence) < 0){
+      cprintf("Args Error occurred in your offset or whence , make sure your code is in format lseek <filename> <offset> <whence> \n");
+      return -1; 
+    }
+
+    if(f->type != FD_INODE){
+      return 0;
+    }
+    int temp_offset = 0;
+    int filesize = f->ip->size;
+
+    // now to write the switch Case for SEEK_RET , SEEK_CUR, SEEK_END
+    switch(whence){
+      case SEEK_CUR:
+        temp_offset = f->off;
+        break;
+
+      case SEEK_END:
+        temp_offset = filesize;
+        break;
+      
+      case SEEK_SET:
+        temp_offset = 0;
+        break;
+      
+      default:
+        cprintf("Sorry wrong whence parameter given");
+        return -1;
+        break;
+    }
+   new_offset = temp_offset + offset;
+    if(new_offset < 0 || new_offset > filesize){
+      cprintf("your offset exceeds filesize or is negative , hence invalid\n");
+      return -1;
+    }
+    f->off = offset + temp_offset;
+    return f->off;
+}
