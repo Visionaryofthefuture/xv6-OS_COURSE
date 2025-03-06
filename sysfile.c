@@ -469,24 +469,19 @@ int sys_lseek(void){
     int filesize = f->ip->size;
 
     // now to write the switch Case for SEEK_RET , SEEK_CUR, SEEK_END
-    switch(whence){
-      case SEEK_CUR:
-        temp_offset = f->off;
-        break;
-
-      case SEEK_END:
-        temp_offset = filesize;
-        break;
-      
-      case SEEK_SET:
-        temp_offset = 0;
-        break;
-      
-      default:
-        cprintf("Sorry wrong whence parameter given");
-        return -1;
-        break;
-    }
+   if(whence == SEEK_CUR){
+    temp_offset = f->off;
+   }
+   else if(whence == SEEK_END){
+    temp_offset = filesize;
+   }
+   else if(whence == SEEK_SET){
+      temp_offset = 0;
+   }
+   else{
+    cprintf("Sorry wrong whence parameter given");
+    return -1;
+   }
    new_offset = temp_offset + offset;
     if(new_offset < 0 || new_offset > filesize){
       cprintf("your offset exceeds filesize or is negative , hence invalid\n");
